@@ -1,0 +1,84 @@
+---
+import { getModrinthMods } from '../../public/getModrinthMods.js';
+
+export interface Props {
+	url: string;
+}
+
+async function getMods() {
+  return await getModrinthMods();
+}
+
+const mods = await getMods();
+---
+
+<ul>
+  {mods.map(item => (
+    <a href={item.link} title={item.description}><li>
+      <div id="img">
+        <img src={item.image} alt={item.title} />        
+      </div>
+      <div id="content">
+        <h2>{item.title}</h2>
+        <div id="newsinfo">
+          <p>{item.date}</p>   
+        </div>     
+      </div>
+    </li></a>
+  ))}
+</ul>
+
+<style>
+  h2 {
+    margin: 0;
+    text-align: center;
+  }
+
+  p {
+    margin: 0;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: #221820;
+    font-size: 14px;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  li {
+    list-style: none;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    width: 280px;
+    height: 210px;
+    border-radius: 7px;
+    background-color: #242022;
+    border: 2px solid #282426;
+    padding: 2px;
+    color: white;
+  }
+
+  #img img {
+    width: 280px;
+    height: 140px;
+    border-radius: 10px;
+  }
+
+  #newsinfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 5px;
+  }
+
+  @media screen and (max-width: 480px) {
+    ul {
+      align-items: center;
+      flex-direction: column;
+    }
+  }
+</style>
